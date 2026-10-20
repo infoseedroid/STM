@@ -1,0 +1,3 @@
+Approved source: Smart_Task_Manager_v0_3_2_105_voice_wave_no_question_bubbles.html
+Protocol: STM_Development_Protocol_and_Improvement_Register_v1.0_31_voice_wave_no_question_bubbles.json
+The source HTML was copied and minimally augmented for PWA installation; original approved file was not modified.

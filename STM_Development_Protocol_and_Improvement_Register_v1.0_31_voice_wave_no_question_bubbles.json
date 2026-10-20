@@ -1,0 +1,608 @@
+{
+  "document_type": "STM Development Protocol and Improvement Register",
+  "schema_version": "1.0",
+  "project": {
+    "name": "Smart Task Manager",
+    "abbreviation": "STM",
+    "reference_version_reported": "v0.3.2.96",
+    "source_rule": "Use the currently approved HTML file in Project sources. Confirm exact filename and contents before editing. Do not assume a higher version or newer file contains every approved improvement.",
+    "approval_rule": "A generated file is not the approved reference until the user tests and explicitly accepts it."
+  },
+  "purpose": "Project instructions and improvement register. This register records requirements from the project conversation; it does not prove that they currently exist or work in the HTML source.",
+  "mandatory_workflow": [
+    "Identify the exact approved HTML file in Project sources and inspect its filename, version if available, and contents before editing.",
+    "Do not use an older generated conversation attachment instead of the approved Project source unless the user explicitly selects it.",
+    "Review the improvement register and identify the relevant requirements before every change.",
+    "Make only the requested change and minimum necessary supporting changes. Avoid unrelated refactoring and broad CSS/shared-logic changes when a local fix is sufficient.",
+    "Preserve approved UI behavior, data, and attachments. Hiding a field from a view or share message must not delete stored data unless explicitly requested.",
+    "Compare source and output diffs; inspect changed regions for regressions, especially shared logic, navigation, page titles, localization, and meeting sharing.",
+    "Run available syntax/static checks and state exactly which checks were run. Do not describe static checks as functional tests.",
+    "Test the requested behavior and relevant regressions in a browser/device when possible. Explicitly state what was not tested.",
+    "Deliver a new file with a distinct descriptive name. Do not overwrite or silently replace the approved source.",
+    "The output remains unapproved until the user tests it and explicitly accepts it.",
+    "Report the source filename, exact changes, prior improvements checked, static checks, functional tests, and limitations.",
+    "If a regression is reported, stop feature work; compare the last approved source and regressed output, investigate the cause, and propose the smallest repair before editing."
+  ],
+  "change_request_template": {
+    "requested_change": "[Describe one requested improvement]",
+    "allowed_scope": "[Exact screen/component/function]",
+    "must_preserve": "[Related prior behavior, or the entire register]",
+    "source_rule": "Use the approved Project source only; stop if the source is ambiguous.",
+    "approval_rule": "Do not replace the approved source until the user tests and accepts the output."
+  },
+  "regression_response": [
+    "Stop editing.",
+    "Identify the exact approved source and regressed output.",
+    "Compare the two versions and locate the cause if possible.",
+    "List the affected register items.",
+    "Propose the smallest repair without applying it until authorized.",
+    "After authorization, patch and rerun relevant checks."
+  ],
+  "improvements_register": [
+    {
+      "id": "STM-001",
+      "area": "Page titles",
+      "requirement": "Remove the duplicate title on the Tasks and Today's Meetings page while preserving its intended primary title.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-002",
+      "area": "Page titles",
+      "requirement": "Remove the duplicate title on the My Meetings page only.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-003",
+      "area": "Page titles",
+      "requirement": "Remove the duplicate title on Settings only. Preserve titles on all other pages. This issue regressed previously; inspect actual title/rendering logic and do not rely only on a CSS hide rule.",
+      "status": "regression_sensitive_verify"
+    },
+    {
+      "id": "STM-004",
+      "area": "Page titles",
+      "requirement": "A page-specific title fix must not change title behavior on other pages.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-005",
+      "area": "New meeting form",
+      "requirement": "Meeting description and notes are optional and must not block saving a new meeting when empty.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-006",
+      "area": "Meeting results",
+      "requirement": "Keep the meeting summary field and make its input area somewhat taller for entering results.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-007",
+      "area": "Meeting results/details",
+      "requirement": "Save the meeting summary and display its saved value in meeting details.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-008",
+      "area": "Meeting details",
+      "requirement": "Do not display Decisions made and Tasks resulting from the meeting fields in meeting details, as requested.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-009",
+      "area": "Meeting details",
+      "requirement": "Preserve the intended display of meeting summary and prior notes/recommendations in meeting details, as applicable to the approved design.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-010",
+      "area": "WhatsApp meeting sharing",
+      "requirement": "Include meeting description in the WhatsApp share message.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-011",
+      "area": "WhatsApp meeting sharing",
+      "requirement": "Include prior notes (الملاحظات المسبقة) in the WhatsApp share message.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-012",
+      "area": "WhatsApp meeting sharing",
+      "requirement": "Format all field labels in the WhatsApp message in bold using WhatsApp-compatible asterisks.",
+      "status": "verify_in_current_source"
+    },
+    {
+      "id": "STM-013",
+      "area": "WhatsApp meeting sharing",
+      "requirement": "Preserve agreed field order: title, meeting date, status, importance, urgency, start time, end time, organization/party, participants, location, creation date, last update, description, prior notes.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-014",
+      "area": "WhatsApp meeting sharing",
+      "requirement": "Exclude meetingSummary, meetingDecisions, meetingRecommendations, meetingFollowups, and meetingResults from the WhatsApp message as requested.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-015",
+      "area": "WhatsApp meeting sharing",
+      "requirement": "Preserve exact closing signature: This mission was created by STM; Analysis & Development: Aladdin Younis; ⟦ SMART TASK MANAGER · STM v0.3.2.86 · Aladdin ⟧.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-016",
+      "area": "Navigation/UI",
+      "requirement": "Preserve approved navigation button behavior and styling; do not change unrelated navigation during a targeted fix.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-017",
+      "area": "Localization/layout",
+      "requirement": "Preserve language-sensitive button placement and Arabic/English layout, including New Task button placement difference by language.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-018",
+      "area": "Data/attachments",
+      "requirement": "Do not delete stored images, attachments, or other task/meeting data when changing what appears in a view or share message.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-019",
+      "area": "Scope control",
+      "requirement": "Do not modify unrelated screens, functions, styles, or data when implementing a targeted improvement.",
+      "status": "preserve"
+    },
+    {
+      "id": "STM-020",
+      "area": "Dashboard hero localization",
+      "requirement": "On the main dashboard only, retain the existing hero illustration and show its kicker, headline, and description in English when the interface language is English; preserve the Arabic text for Arabic and do not change other screens or layout.",
+      "status": "implemented_static_check_pending_user_test"
+    },
+    {
+      "id": "STM-021",
+      "area": "Dashboard calendar",
+      "requirement": "On the main dashboard only, tapping the calendar icon in the Today Tasks & Meetings overview card opens a localized month calendar with previous/next month navigation, selectable dates, a Today shortcut, and close controls. Tapping elsewhere on the overview card must retain its existing navigation to the Today details screen. Preserve all other dashboard behavior and screens.",
+      "status": "implemented_static_check_pending_user_test"
+    },
+    {
+      "id": "STM-022",
+      "area": "Dashboard calendar visual design",
+      "requirement": "On the existing dashboard calendar popup only, improve visual polish (modal surface, header, month navigation, weekday labels, date cells, today/selected states, focus states, responsive spacing) without changing calendar behavior, data, navigation, or any other screen. Preserve STM-021 behavior.",
+      "status": "implemented_css_only_static_diff_reviewed_pending_user_test"
+    },
+    {
+      "id": "STM-023",
+      "area": "Dashboard calendar interactive agenda",
+      "requirement": "On the dashboard calendar popup only, selecting a date displays actual work tasks due that date, meetings scheduled that date, and personal tasks dated that date in separate readable groups. Show per-day record counts in the calendar, sort tasks/meetings by their relevant time then title, and make listed records open their existing details/actions. Read existing IndexedDB/localStorage data only; do not write, migrate, delete, or alter records. Preserve month navigation, Today shortcut, close behavior, calendar visual design, and all other screens.",
+      "status": "implemented_static_syntax_checked_diff_reviewed_pending_browser_and_user_test"
+    },
+    {
+      "id": "STM-024",
+      "area": "Dashboard today-count status colors",
+      "requirement": "On the main dashboard only, color each of the three Today Tasks, Today Meetings, and Personal Tasks count cards according to its own count: calm green when the count is zero and pale red with red emphasis when the count is greater than zero. Update the state dynamically whenever the overview is rendered. Preserve counts, data, card layout, calendar interaction, and all other screens.",
+      "status": "implemented_static_syntax_checked_diff_reviewed_pending_browser_and_user_test"
+    },
+    {
+      "id": "STM-026",
+      "area": "Aladdin assistant mobile welcome layout",
+      "requirement": "On the assistant dialog only, retain text conversation, voice conversation, and cancel choices; redesign them as readable icon-led cards, increase the mobile dialog height, and organize replay/back/cancel-conversation controls in a distinct compact footer. Keep the welcome safety promise and all conversation logic, task/meeting creation, data, and unrelated screens unchanged. Use a responsive RTL layout and preserve English localization.",
+      "status": "implemented_static_syntax_checked_diff_reviewed_pending_browser_and_user_test"
+    },
+    {
+      "id": "STM-027",
+      "area": "Aladdin assistant header and welcome copy",
+      "requirement": "On the assistant dialog only, replace the header letter avatar with the already embedded STM robot image and shorten the Arabic/English welcome message to state briefly that this screen creates a task or meeting. Preserve the assistant header layout, mobile responsive design, text/voice/cancel choices, footer controls, confirmation-before-save notice, all conversation logic, stored data, and unrelated screens. Reuse an existing embedded robot asset; do not add external dependencies.",
+      "status": "implemented_static_syntax_checked_diff_reviewed_pending_browser_and_user_test"
+    },
+    {
+      "id": "STM-028",
+      "area": "Aladdin assistant text conversation onboarding",
+      "requirement": "On the assistant dialog only, use the user-approved full Arabic welcome message and an equivalent English welcome. When Text Conversation is selected, remove the welcome choice cards, show an animated typing indicator for about 1.3 seconds, then display the first prompt and its task/meeting choices shortly afterward. Preserve voice mode behavior, task/meeting workflows, confirmation-before-save, all stored data, the assistant mobile layout, and unrelated screens.",
+      "status": "implemented_static_syntax_checked_diff_reviewed_pending_browser_and_user_test"
+    },
+    {
+      "id": "STM-029",
+      "area": "Aladdin assistant WhatsApp-style conversation history and send control",
+      "requirement": "On the assistant dialog only, show the animated typing indicator before every question in text and voice-guided form flows, then append the question and available answers without clearing prior chat messages. Keep user answers and previous questions visible in a scrollable conversation through the final review, while removing only obsolete choice controls when a choice is selected. Fix the duplicate send control by keeping the microphone button as a microphone and styling a single submit button with the conventional paper-plane send icon. Preserve task/meeting fields, answer processing, confirmation-before-save, stored data, mobile layout, and unrelated screens.",
+      "status": "implemented_static_syntax_checked_diff_reviewed_pending_browser_and_user_test"
+    },
+    {
+      "id": "STM-030",
+      "area": "Aladdin assistant mobile chat scrolling, send/microphone order, and header robot",
+      "requirement": "Make the assistant chat history vertically scrollable on mobile with a visible scrollbar; order the send button directly beside the answer field and the microphone button next to it; display the header robot without a square background and enlarge it slightly. Preserve chat history, typing indicator, task/meeting flows, and all other system behavior.",
+      "status": "implemented_static_syntax_checked_diff_review_pending_browser_and_user_test"
+    },
+    {
+      "id": "STM-031",
+      "title": "تقليل ارتفاع نافذة المساعد وإظهار الشاشة الخلفية بتمويه",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant dialog UI only",
+      "changes": [
+        "خفض ارتفاع نافذة المساعد إلى min(78vh, 760px) وبحد أقصى 82vh.",
+        "إظهار الشاشة الرئيسية خلف النافذة مع طبقة تعتيم خفيفة وتمويه backdrop blur بمقدار 7px.",
+        "الإبقاء على التمرير الداخلي للمحادثة وأدوات التحكم ومنطق المهام والاجتماعات دون تعديل."
+      ],
+      "validation": {
+        "source_file": "Smart_Task_Manager_v0_3_2_93_assistant_chat_scroll_send_mic_robot_header.html",
+        "syntax_check": "not_run_browser_runtime",
+        "mobile_visual_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-032",
+      "title": "تقليل ارتفاع نافذة المساعد من الأعلى مع تثبيت الحافة السفلية",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant dialog UI only",
+      "changes": [
+        "تقليل ارتفاع النافذة إلى نحو 39% من ارتفاع الشاشة (بحد أقصى 380px).",
+        "تثبيت النافذة عند الحافة السفلية للمساحة المتاحة حتى يحدث تقليل الارتفاع من الأعلى فقط.",
+        "الإبقاء على تمويه الشاشة الخلفية وطبقة التعتيم وأدوات المحادثة كما هي."
+      ],
+      "validation": {
+        "file": "Smart_Task_Manager_v0_3_2_93_assistant_compact_blur_top_reduced.html",
+        "json_validated": true,
+        "mobile_visual_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-033",
+      "title": "تطبيق نافذة المساعد ضمن المنطقة المحددة مع تثبيت الأسفل",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant UI only",
+      "changes": [
+        "ضبط نافذة المساعد على الهاتف لتشغل 65% من ارتفاع نافذة العرض تقريبًا، مع تثبيت حافتها السفلية عند أسفل الشاشة.",
+        "إظهار المساحة المتبقية أعلى نافذة المساعد من الشاشة الرئيسية مع تمويه الخلفية وتعتيم خفيف.",
+        "إزالة قاعدة الهاتف السابقة التي كانت توسع النافذة إلى 94dvh وتلغي أثر تقليل الارتفاع."
+      ],
+      "validation": {
+        "css_rule_updated": true,
+        "protocol_json_validated": true,
+        "mobile_visual_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-034",
+      "title": "إظهار المراجعة النهائية مباشرة بعد تعديل إجابة",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant task/meeting review flow only",
+      "changes": [
+        "عند اختيار تعديل إجابة وتحديد السؤال، يعاد عرض السؤال المحدد فقط.",
+        "بعد حفظ الإجابة المعدلة، تعرض المراجعة النهائية فورًا مع جميع القيم الحالية، بدل إعادة طرح الأسئلة اللاحقة.",
+        "تطبيق السلوك نفسه على إجابات الاختيار والإجابات النصية، لمساري المهمة والاجتماع.",
+        "الحفاظ على بقية الإجابات المدخلة وعدم حفظ السجل إلا بعد تأكيد المستخدم."
+      ],
+      "validation": {
+        "source": "Smart_Task_Manager_v0_3_2_93_assistant_bottom_sheet_65vh_blur.html (latest project source)",
+        "static_patch_checks": true,
+        "javascript_syntax_check": "pending",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-035",
+      "title": "اتجاه المحادثة يتبع لغة النظام المختارة",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant dialog only",
+      "changes": [
+        "عند اختيار الإنجليزية، تصبح نافذة المساعد ومحتوى الأسئلة والفقاعات وخيارات الإجابة وحقل الإدخال من اليسار إلى اليمين (LTR)، مع محاذاة النصوص الإنجليزية إلى اليسار.",
+        "عند اختيار العربية، تبقى المحادثة من اليمين إلى اليسار (RTL) ومحاذاة النصوص إلى اليمين.",
+        "حصر قواعد الاتجاه الجديدة داخل نافذة المساعد وعدم تغيير تخطيط بقية النظام."
+      ],
+      "validation": {
+        "source": "Smart_Task_Manager_v0_3_2_93_assistant_edit_answer_summary.html (latest project source)",
+        "css_patch_applied": true,
+        "json_validated": true,
+        "javascript_syntax_check": "pending",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-036",
+      "title": "إخفاء عناصر الصوت أثناء المحادثة النصية",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant conversation-mode controls only",
+      "changes": [
+        "إخفاء زر إعادة السؤال الصوتي وزر الميكروفون عند اختيار المحادثة النصية.",
+        "إظهار عناصر الصوت عند اختيار المحادثة الصوتية.",
+        "الإبقاء على خيار المحادثة الصوتية في شاشة الترحيب.",
+        "حصر التغييرات داخل نافذة المساعد الذكي دون تغيير منطق إنشاء المهام والاجتماعات أو النظام الرئيسي."
+      ],
+      "validation": {
+        "assistant_scoped_css_patch": true,
+        "mode_switch_patch": true,
+        "html_structure_checks": true,
+        "json_validated": true,
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-037",
+      "title": "إتاحة إرفاق الصور في جميع أنواع المهام من المساعد الذكي",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant task creation flow only",
+      "changes": [
+        "إظهار مكون إرفاق الصور مباشرة بعد اختيار نوع المهمة.",
+        "إتاحة التقاط الصور أو اختيارها من الاستديو، بحد أقصى خمس صور، باستخدام مكون النظام الحالي.",
+        "حفظ الصور مع المهمة لجميع الأنواع، وليس لنوع حل المشكلة فقط.",
+        "إظهار عدد الصور المرفقة في المراجعة النهائية قبل التأكيد.",
+        "عدم تعديل نموذج إنشاء المهمة الرئيسي أو مسار الاجتماعات."
+      ],
+      "validation": {
+        "existing_media_component_reused": true,
+        "task_type_branch_updated": true,
+        "all_task_types_persist_images": true,
+        "final_review_attachment_count": true,
+        "html_structure_checks": true,
+        "json_validated": true,
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-038",
+      "title": "زيادة ارتفاع نافذة المساعد الذكي على الهاتف",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant dialog mobile layout only",
+      "changes": [
+        "زيادة ارتفاع نافذة المساعد على الشاشات التي لا يتجاوز عرضها 640px إلى 80dvh، بحيث يرتفع حدها العلوي وتبقى مساحة من النظام الرئيسي ظاهرة خلف طبقة التمويه.",
+        "تطبيق التغيير عبر CSS إضافي محصور في نافذة المساعد، مع إبقاء مواضع وأحجام عناصر النظام الرئيسي دون تعديل.",
+        "الحفاظ على سلوك التمرير داخل المحادثة والتذييل الثابت وأزرار التحكم كما هي."
+      ],
+      "validation": {
+        "assistant_scoped_css_patch": true,
+        "existing_source_preserved_as_input": true,
+        "json_validated": true,
+        "html_structure_check": "passed_basic_tag_check",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-039",
+      "title": "تمييز أسئلة المساعد بلون مختلف عن إجابات المستخدم",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant conversation bot message bubbles only",
+      "changes": [
+        "تغيير خلفية رسائل وأسئلة المساعد من الأبيض إلى أزرق فاتح هادئ (#edf4ff) مع حد أزرق متناسق (#cbdcf5).",
+        "الإبقاء على لون إجابات المستخدم كما هو، لتمييز رسائل المساعد بصريًا عن ردود المستخدم.",
+        "حصر التعديل في قاعدة CSS الخاصة بـ .alaa-bot دون تغيير منطق المحادثة أو خيارات الإجابة أو اتجاه اللغة."
+      ],
+      "validation": {
+        "assistant_scoped_css_patch": true,
+        "project_source_used": "Smart_Task_Manager_v0_3_2_93_assistant_taller_mobile_panel.html",
+        "css_rule_replacement_count": 1,
+        "json_validated": true,
+        "html_basic_structure_check": "pending"
+      }
+    },
+    {
+      "id": "STM-040",
+      "title": "توحيد رسالة مشاركة اجتماعات المساعد الذكي مع صيغة اجتماعاتي",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant meeting WhatsApp sharing only",
+      "changes": [
+        "مطابقة رسالة دعوة الاجتماع التي يشاركها المساعد الذكي مع التنسيق المعتمد في مشاركة الاجتماع من شاشة اجتماعاتي.",
+        "إظهار العنوان والوصف/جدول الأعمال والتاريخ والوقت والجهة/الشركة ومكان الاجتماع وتاريخ إنشاء الدعوة وآخر تحديث بالترتيب المحدد.",
+        "إضافة رابط تأكيد الحضور ورابط عدم الحضور والتوقيع الختامي المعتمد كما في المثال المقدم.",
+        "إزالة التذييل العام السابق ورابط النظام المؤقت من رسالة اجتماع المساعد؛ دون تغيير مشاركة الاجتماعات من شاشة اجتماعاتي أو البيانات المخزنة."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_94_assistant_task_share_persistent.html",
+        "meeting_share_template_aligned_to_main_screen": true,
+        "html_basic_structure_check": "pending",
+        "javascript_syntax_check": "pending",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-041",
+      "title": "تكييف رسائل مشاركة المهام والاجتماعات عبر واتساب حسب لغة النظام",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant WhatsApp sharing only",
+      "changes": [
+        "عند اختيار اللغة الإنجليزية للنظام، تصبح عناوين حقول رسائل المهام والاجتماعات التي ينشئها المساعد الذكي باللغة الإنجليزية مع الحفاظ على ترتيب الحقول والقالب المعتمد.",
+        "تظل الرسائل باللغة العربية عند اختيار اللغة العربية للنظام.",
+        "ترجمة تسميات النوع والحالة والأهمية والاستعجال للمهمة، وتسميات دعوة الاجتماع وروابط تأكيد/رفض الحضور إلى الإنجليزية عند استخدام الواجهة الإنجليزية.",
+        "عدم تغيير مشاركة المهام والاجتماعات من الشاشات الرئيسية أو تعديل السجلات المخزنة أو أي وظائف أخرى."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_95_assistant_meeting_whatsapp_format.html",
+        "task_and_meeting_share_language_uses_system_language": true,
+        "scope_limited_to_assistant_whatsapp_sharing": true,
+        "html_basic_structure_check": "pending",
+        "javascript_syntax_check": "pending",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-042",
+      "title": "تصميم شاشة تمهيدية للمحادثة الصوتية في المساعد الذكي",
+      "status": "implemented_pending_user_validation",
+      "scope": "Aladdin assistant voice-mode entry UI only; no task/meeting business logic changes",
+      "changes": [
+        "إضافة شاشة تمهيدية مرئية عند اختيار المحادثة الصوتية، تعرض صورة روبوت STM المعتمدة في وسط الشاشة مع خلفية فاتحة متوافقة مع واجهة المساعد.",
+        "إضافة هالة مضيئة وحركة ارتفاع وانخفاض خفيفة وموجة صوتية متحركة مع دعم تقليل الحركة حسب إعدادات النظام.",
+        "إضافة حالة نصية مترجمة للعربية والإنجليزية وأزرار بدء المحادثة والرجوع.",
+        "تشغيل تحية صوتية قصيرة عند فتح الشاشة ثم تغيير الحالة إلى جاهز للاستماع؛ يبدأ مسار المحادثة الصوتية الحالي بعد ضغط بدء المحادثة.",
+        "عدم تعديل منطق إنشاء المهام أو الاجتماعات أو الحفظ أو المشاركة أو أي شاشة أخرى."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_96_assistant_whatsapp_language.html",
+        "source_diff_scope": "voice-mode branch, local voice intro renderer, and dedicated CSS only",
+        "html_basic_structure_check": "pending",
+        "javascript_syntax_check": "pending",
+        "visual_browser_test": "pending_user_validation",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-044",
+      "title": "تفضيل صوت رجالي للمساعد الصوتي باللغتين العربية والإنجليزية",
+      "status": "implemented_pending_user_validation",
+      "scope": "SpeechSynthesis voice selection for Arabic and English in the assistant voice intro and spoken assistant replies only; no speech recognition, task/meeting logic, storage, or sharing changes",
+      "changes": [
+        "إضافة اختيار تفضيلي لصوت من أصوات النظام المطابقة للغة العربية أو الإنجليزية ويشير اسمه إلى صوت رجالي عند توفره.",
+        "تطبيق اختيار الصوت على التحية التمهيدية وعلى الردود الصوتية اللاحقة للمساعد.",
+        "إعادة محاولة اختيار الصوت عند تحميل قائمة الأصوات بشكل غير متزامن في المتصفح.",
+        "عند عدم توفر صوت مطابق يشير اسمه إلى صوت رجالي، استخدام صوت مطابق للغة أو الصوت الافتراضي المتاح دون تعطيل النطق."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_98_voice_button_alignment.html",
+        "source_diff_scope": "SpeechSynthesis voice selection helper and its use in voice intro and assistant speech only",
+        "json_parse": "passed",
+        "javascript_syntax_check": "pending",
+        "device_voice_availability": "requires_user_device_test",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-045",
+      "title": "إصلاح بدء الاستماع الصوتي التلقائي وإظهار مؤشر الميكروفون",
+      "status": "implemented_static_checks_passed_pending_user_validation",
+      "scope": "Aladdin assistant voice conversation only; initial task/meeting choice and visible microphone listening status; preserve text mode, task/meeting fields, storage, sharing, and unrelated screens.",
+      "changes": [
+        "السماح لمحرك التعرف على الكلام بمعالجة السؤال الأول قبل اختيار نوع المسار (مهمة أو اجتماع)، بدلًا من الخروج بسبب عدم وجود حقل بيانات نشط بعد.",
+        "التعرف على الإجابات المنطوقة الخاصة بالمهمة والاجتماع بالعربية والإنجليزية، ثم الانتقال إلى المسار الموجود دون تغيير منطق إنشاء السجلات.",
+        "إظهار حالة مرئية أثناء انتظار الاستماع والاستماع الفعلي، ورسالة واضحة عند عدم دعم التعرف على الكلام أو تعذر الميكروفون.",
+        "بدء الاستماع بعد انتهاء نطق السؤال الأول، مع الإبقاء على أزرار الاختيار والكتابة كبدائل."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_100_task_meeting_voice_trial.html (latest available project file in working source set)",
+        "source_diff_scope": "Aladdin voice speech completion callback, voice recognition startup/first-choice result handling, voice-start handler, and local status styling only",
+        "html_parser_check": "passed",
+        "javascript_syntax_check": "passed (node --check on inline scripts)",
+        "source_output_diff_review": "completed; targeted voice-related changes only",
+        "browser_microphone_functional_test": "not run; requires browser/device permission and speech recognition runtime",
+        "mobile_runtime_test": "pending_user_validation"
+      }
+    },
+    {
+      "id": "STM-046",
+      "title": "إلغاء استقبال الإجابات عبر الميكروفون والإبقاء على طرح الأسئلة صوتيًا",
+      "status": "implemented_static_checks_pending_user_validation",
+      "scope": "Aladdin assistant voice mode only; spoken assistant prompts with standard text input and on-screen choice buttons; no speech recognition or microphone capture.",
+      "changes": [
+        "إزالة وظيفة التعرف على الكلام وبدء/إيقاف الاستماع التلقائي ورسائل أخطاء الميكروفون من مسار المساعد.",
+        "إزالة زر الميكروفون من حقل الإجابة؛ تبقى الإجابات النصية عبر حقل الإدخال المعتاد وأزرار الخيارات الموجودة.",
+        "الإبقاء على تحويل أسئلة المساعد وردوده إلى كلام باستخدام SpeechSynthesis في وضع المحادثة الصوتية.",
+        "تعديل النص التمهيدي ليبيّن أن الأسئلة تُطرح صوتيًا وأن الإجابة تكون بالكتابة أو باختيار الأزرار.",
+        "عدم تعديل منطق إنشاء المهمة والاجتماع أو التخزين أو المشاركة أو الشاشات الأخرى."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_101_voice_auto_listening_fix.html",
+        "source_rule": "Used latest available source in working project source set and latest improvement register; retained prior source unchanged.",
+        "scope": "voice assistant speech output and answer input only",
+        "html_parser_check": "passed",
+        "javascript_syntax_check": "passed (node --check on inline scripts)",
+        "source_output_diff_review": "completed; microphone capture references and button removed, speech synthesis retained",
+        "browser_speech_output_test": "not run; requires browser/device test",
+        "user_validation": "pending"
+      }
+    },
+    {
+      "id": "STM-047",
+      "title": "تحسين سلامة الصياغة العربية للنطق الصوتي",
+      "status": "implemented_static_checks_pending_user_validation",
+      "scope": "Aladdin assistant Arabic spoken prompts and Arabic task/meeting question labels only.",
+      "changes": [
+        "تنقيح صياغة أسئلة المهمة والاجتماع لتكون أفصح وأكثر طبيعية عند سماعها.",
+        "توضيح أن المساعد ينطق الأسئلة وأن الإجابة تكون بالكتابة أو بالاختيار.",
+        "الإبقاء على النطق الصوتي فقط وعدم إضافة الميكروفون أو التعرّف على الكلام."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_102_voice_output_text_input.html",
+        "output_file": "Smart_Task_Manager_v0_3_2_103_arabic_tts_grammar.html",
+        "html_parser_check": "passed",
+        "javascript_syntax_check": "passed (node --check on all inline scripts)",
+        "json_syntax_check": "passed",
+        "browser_speech_output_test": "not run; requires browser/device testing",
+        "user_validation": "pending",
+        "source_output_diff_review": "completed; diff limited to Arabic prompt wording, spoken-mode helper copy, and document title/version"
+      }
+    },
+    {
+      "id": "STM-048",
+      "title": "إيقاف تشكيل آخر كلمة في العبارات العربية المنطوقة",
+      "status": "implemented_static_checks_pending_user_validation",
+      "scope": "Arabic speech synthesis output in Aladdin assistant only.",
+      "changes": [
+        "إزالة علامات التشكيل من آخر كلمة عربية في النص المنطوق فقط، للمساعدة على الوقف الطبيعي عند النقطة أو علامة الاستفهام.",
+        "الإبقاء على النص المعروض كما هو، وعلى النطق الإنجليزي وطريقة الإجابة بالكتابة أو الاختيار دون تغيير."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_103_arabic_tts_grammar.html",
+        "output_file": "Smart_Task_Manager_v0_3_2_104_arabic_final_word_pause.html",
+        "html_parser_check": "passed",
+        "javascript_syntax_check": "passed (node --check on all 5 inline scripts)",
+        "json_syntax_check": "passed",
+        "source_output_diff_review": "completed; changed only speech text preprocessing and document version/title",
+        "browser_speech_output_test": "not run; requires browser/device testing",
+        "user_validation": "pending"
+      }
+    },
+    {
+      "id": "STM-049",
+      "title": "إخفاء فقاعات الأسئلة في المحادثة الصوتية واستبدالها بموجة متحركة",
+      "status": "implemented_static_checks_pending_user_validation",
+      "scope": "Aladdin voice conversation display for task and meeting question flow only.",
+      "changes": [
+        "في وضع المحادثة الصوتية، لا يظهر نص السؤال الاعتيادي داخل فقاعة المحادثة؛ تظهر بدلًا منه موجة صوتية متحركة وحالة توضح أن المساعد يطرح السؤال أو أن الإجابة متاحة بالكتابة أو الاختيار.",
+        "الإبقاء على إجابات المستخدم المعروضة، وملخص المهمة أو الاجتماع قبل الحفظ، والأسئلة الظاهرة عند تعديل أحد الحقول.",
+        "الإبقاء على واجهة المحادثة النصية دون تغيير مقصود، وعدم إعادة تفعيل الميكروفون أو التعرف على الكلام.",
+        "إبقاء أزرار الخيارات وعناصر إرفاق صور المهمة ظاهرة وقابلة للاستخدام."
+      ],
+      "validation": {
+        "project_source_used": "Smart_Task_Manager_v0_3_2_104_arabic_final_word_pause.html",
+        "output_file": "Smart_Task_Manager_v0_3_2_105_voice_wave_no_question_bubbles.html",
+        "html_parser_check": "pending",
+        "javascript_syntax_check": "pending",
+        "json_syntax_check": "passed",
+        "source_output_diff_review": "pending",
+        "browser_speech_output_test": "not run; requires browser/device testing",
+        "user_validation": "pending"
+      }
+    }
+  ],
+  "status_legend": {
+    "verify_in_current_source": "Previously requested; inspect the currently approved HTML file to confirm implementation and behavior.",
+    "regression_sensitive_verify": "Previously regressed; inspect and test carefully before marking verified.",
+    "preserve": "Must be preserved in future edits; current implementation still needs verification unless separately tested."
+  },
+  "approval_checklist": [
+    "Exact approved source identified",
+    "Relevant register items reviewed",
+    "Requested change scope confirmed",
+    "Source/output diff reviewed",
+    "No unrelated modifications identified",
+    "Relevant prior behavior regression-checked",
+    "Static/syntax checks reported accurately",
+    "Functional tests and limitations reported accurately",
+    "New file delivered without replacing approved source",
+    "User tests and explicitly approves before promotion to reference source"
+  ],
+  "register_revision": "1.0.31",
+  "last_change_summary": "STM-049: استبدال فقاعات الأسئلة في المحادثة الصوتية بموجة صوتية متحركة مع الحفاظ على الملخص النهائي وأسئلة التعديل.",
+  "latest_change": {
+    "id": "STM-049",
+    "title": "إخفاء فقاعات الأسئلة في المحادثة الصوتية واستبدالها بموجة متحركة",
+    "status": "implemented_static_checks_pending_user_validation",
+    "scope": "Aladdin voice conversation display for task and meeting question flow only.",
+    "changes": [
+      "في وضع المحادثة الصوتية، لا يظهر نص السؤال الاعتيادي داخل فقاعة المحادثة؛ تظهر بدلًا منه موجة صوتية متحركة وحالة توضح أن المساعد يطرح السؤال أو أن الإجابة متاحة بالكتابة أو الاختيار.",
+      "الإبقاء على إجابات المستخدم المعروضة، وملخص المهمة أو الاجتماع قبل الحفظ، والأسئلة الظاهرة عند تعديل أحد الحقول.",
+      "الإبقاء على واجهة المحادثة النصية دون تغيير مقصود، وعدم إعادة تفعيل الميكروفون أو التعرف على الكلام.",
+      "إبقاء أزرار الخيارات وعناصر إرفاق صور المهمة ظاهرة وقابلة للاستخدام."
+    ],
+    "validation": {
+      "project_source_used": "Smart_Task_Manager_v0_3_2_104_arabic_final_word_pause.html",
+      "output_file": "Smart_Task_Manager_v0_3_2_105_voice_wave_no_question_bubbles.html",
+      "html_parser_check": "pending",
+      "javascript_syntax_check": "pending",
+      "json_syntax_check": "passed",
+      "source_output_diff_review": "pending",
+      "browser_speech_output_test": "not run; requires browser/device testing",
+      "user_validation": "pending"
+    }
+  },
+  "protocol_version": "1.0.31",
+  "reference_version_reported": "v0.3.2.104"
+}
